@@ -68,8 +68,16 @@
 
       <section class="panel heatmap">
         <h2>Main ball heatmap</h2>
-        <p class="panel-note">Darker cells appeared more often across all draws.</p>
+        <p class="panel-note">
+          Colour blends draw frequency and how long since each number last appeared.
+          Hot reds and golds are drawn often and recently; cold blues are overdue or rare.
+        </p>
         <div id="main-heatmap" class="heatmap-grid"></div>
+        <div class="heatmap-legend" aria-hidden="true">
+          <span class="legend-label">Cold / overdue</span>
+          <div class="legend-bar"></div>
+          <span class="legend-label">Hot / frequent</span>
+        </div>
       </section>
     </main>
   </div>
