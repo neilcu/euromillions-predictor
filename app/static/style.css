@@ -1,0 +1,264 @@
+:root {
+  --bg: #08111f;
+  --panel: #101b31;
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --text: #edf2ff;
+  --muted: #9fb0d0;
+  --gold: #f4c542;
+  --gold-soft: rgba(244, 197, 66, 0.18);
+  --blue: #4f8cff;
+  --star: #7dd3fc;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(79, 140, 255, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(244, 197, 66, 0.12), transparent 24%),
+    linear-gradient(180deg, #050b16 0%, var(--bg) 100%);
+}
+
+.page {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 1rem 0 0;
+  max-width: 42rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero-card,
+.panel {
+  background: rgba(16, 27, 49, 0.88);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.hero-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.card-value {
+  margin: 0.4rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.card-meta {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+}
+
+.panel {
+  padding: 1.5rem;
+}
+
+.stats,
+.heatmap {
+  grid-column: 1 / -1;
+}
+
+h2,
+h3 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin: 1rem 0 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  background: #0b1424;
+  color: var(--text);
+  font: inherit;
+}
+
+.primary-button,
+.ghost-button {
+  margin-top: 1.2rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 1.2rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold), #f0a500);
+  color: #1a1200;
+}
+
+.ghost-button {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+}
+
+.disclaimer,
+.panel-note,
+.placeholder {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.prediction-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.prediction-card {
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--panel-border);
+}
+
+.prediction-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.ball-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.ball,
+.star {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.ball {
+  background: linear-gradient(180deg, #ffffff, #d7e0ef);
+  color: #10203a;
+}
+
+.star {
+  background: linear-gradient(180deg, #d9f6ff, var(--star));
+  color: #083344;
+}
+
+.stars-label {
+  margin-left: 0.4rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.leaderboard {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.leaderboard li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.heat-cell {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .layout,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EuroMillions Predictor</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Tutorial project</p>
+        <h1>EuroMillions Predictor</h1>
+        <p class="subtitle">
+          Analyze every historical draw and explore frequency-based number suggestions.
+          For learning and fun — not gambling advice.
+        </p>
+      </div>
+      <div class="hero-card" id="dataset-card">
+        <p class="card-label">Dataset</p>
+        <p class="card-value" id="draw-count">Loading…</p>
+        <p class="card-meta" id="draw-range"></p>
+        <button class="ghost-button" id="refresh-btn" type="button">Refresh data</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel controls">
+        <h2>Generate lines</h2>
+        <form id="predict-form">
+          <label for="strategy">Strategy</label>
+          <select id="strategy" name="strategy">
+            <option value="balanced">Balanced — hot + overdue mix</option>
+            <option value="hot">Hot — most frequent numbers</option>
+            <option value="cold">Cold — longest absent numbers</option>
+            <option value="random">Random — unbiased baseline</option>
+          </select>
+
+          <label for="lines">Number of lines</label>
+          <input id="lines" name="lines" type="number" min="1" max="10" value="3">
+
+          <button class="primary-button" type="submit">Predict numbers</button>
+        </form>
+        <p class="disclaimer" id="disclaimer"></p>
+      </section>
+
+      <section class="panel results">
+        <h2>Suggested lines</h2>
+        <div id="predictions" class="prediction-list">
+          <p class="placeholder">Choose a strategy and generate your first line.</p>
+        </div>
+      </section>
+
+      <section class="panel stats">
+        <h2>Frequency leaders</h2>
+        <div class="stats-grid">
+          <div>
+            <h3>Main balls</h3>
+            <ul id="top-main" class="leaderboard"></ul>
+          </div>
+          <div>
+            <h3>Lucky stars</h3>
+            <ul id="top-stars" class="leaderboard"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel heatmap">
+        <h2>Main ball heatmap</h2>
+        <p class="panel-note">Darker cells appeared more often across all draws.</p>
+        <div id="main-heatmap" class="heatmap-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
