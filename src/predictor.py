@@ -6,13 +6,14 @@ import random
 from dataclasses import dataclass
 from enum import Enum
 
-from .analysis import main_ball_stats, star_stats, top_numbers
+from .analysis import NumberStats, main_ball_stats, star_stats, top_numbers
 from .data import Draw, MAIN_MAX, MAIN_MIN, STAR_MAX, STAR_MIN
 
 
 class Strategy(str, Enum):
     HOT = "hot"
     COLD = "cold"
+    DUE = "due"
     BALANCED = "balanced"
     RANDOM = "random"
 
@@ -33,6 +34,14 @@ def _pick_unique(numbers: list[int], count: int) -> list[int]:
         if len(chosen) == count:
             break
     return sorted(chosen)
+
+
+def _overdue_score(item: NumberStats, total_draws: int) -> float:
+    """How overdue a number is relative to its typical appearance gap."""
+    if item.count == 0:
+        return float(item.draws_since_last)
+    average_gap = total_draws / item.count
+    return item.draws_since_last / average_gap
 
 
 def _weighted_sample(
@@ -82,12 +91,34 @@ def predict(
         )
         rationale = "Picks numbers that have not appeared for the longest time."
 
+    elif strategy == Strategy.DUE:
+        total_draws = len(draws)
+        main = _pick_unique(
+            top_numbers(
+                main_stats,
+                12,
+                key=lambda item: _overdue_score(item, total_draws),
+            ),
+            5,
+        )
+        stars = _pick_unique(
+            top_numbers(
+                star_stat_list,
+                6,
+                key=lambda item: _overdue_score(item, total_draws),
+            ),
+            2,
+        )
+        rationale = (
+            "Picks numbers most overdue compared with how often they usually appear."
+        )
+
     elif strategy == Strategy.RANDOM:
         main = sorted(rng.sample(range(MAIN_MIN, MAIN_MAX + 1), 5))
         stars = sorted(rng.sample(range(STAR_MIN, STAR_MAX + 1), 2))
         rationale = "Pure random selection (useful as a baseline)."
 
-    else:
+    elif strategy == Strategy.BALANCED:
         main = _weighted_sample(
             main_stats,
             5,
@@ -103,6 +134,9 @@ def predict(
         rationale = (
             "Weighted mix of frequently drawn numbers and long-absent numbers."
         )
+
+    else:
+        raise ValueError(f"Unsupported strategy: {strategy}")
 
     while len(main) < 5:
         candidate = rng.randint(MAIN_MIN, MAIN_MAX)

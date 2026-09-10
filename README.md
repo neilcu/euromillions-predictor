@@ -76,7 +76,8 @@ euromillions-predictor/
 | Strategy   | Idea |
 |-----------|------|
 | `hot`     | Most frequently drawn numbers |
-| `cold`    | Numbers absent the longest |
+| `due`     | Numbers most overdue vs their usual appearance gap |
+| `cold`    | Numbers absent the longest (raw gap) |
 | `balanced`| Weighted mix of hot and overdue numbers |
 | `random`  | Pure random baseline |
 
